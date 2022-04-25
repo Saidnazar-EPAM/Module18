@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h2>Categories</h2>
+    <table border="1" id="Categories">
+        <thead>
+            <tr>
+                <th>CategoryId</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <h2>Products</h2>
+    <table border="1" id="Products">
+        <thead>
+            <tr>
+                <th>ProductId</th>
+                <th>Name</th>
+                <th>Unit Price</th>
+                <th>Quantity Per Unit</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $.ajax({
+            url: 'https://localhost:7069/api/Categories',
+            dataType: 'json',
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var row = $('<tr><td>' + data[i].categoryId + '</td><td>' + data[i].categoryName + '</td><td>' + data[i].description + '</td></tr>');
+                    $('#Categories tbody').append(row);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error: ' + textStatus + ' - ' + errorThrown);
+            }
+        });
+        $.ajax({
+            url: 'https://localhost:7069/api/Products',
+            dataType: 'json',
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var row = $('<tr><td>' + data[i].productId + '</td><td>' + data[i].productName + '</td><td>' + data[i].unitPrice + '</td><td>' + data[i].quantityPerUnit + '</td></tr>');
+                    $('#Products tbody').append(row);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert('Error: ' + textStatus + ' - ' + errorThrown);
+            }
+        });
+    </script>
+</body>
+</html>
